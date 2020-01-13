@@ -55,14 +55,15 @@ module.exports = React.createClass({
 
 		return false;
 	},
-	__itemClick: function (item){
-		var _return = this.props.onItemClick && this.props.onItemClick(item, this);
+	__itemClick: function (event, index){
+		var _return = this.props.onItemClick && this.props.onItemClick(event, this);
 		if(_return == null) {
-			this.__clickDefault(item);
+			this.__clickDefault(event);
 		}
 	},
-	__clickDefault: function (item){
-		var _value = item[this.props.valueKey];
+	__clickDefault: function (event){
+		var _data = event.data,
+			_value = _data[this.props.valueKey];
 		if(this.props.selectMode == 'single') {
 			this.state.value = _value;
 		} else if(zn.is(this.state.value, 'array')) {
@@ -72,8 +73,9 @@ module.exports = React.createClass({
 				this.state.value.push(_value);
 			}
 		}
+		event.value = this.state.value;
 		this.forceUpdate();
-		this.props.onChanged && this.props.onChanged(this.state.value, item, this);
+		this.props.onChange && this.props.onChange(event, this);
 	},
 	__itemRender: function (item, index){
 		if(!zn.is(item, 'object')){
@@ -89,8 +91,9 @@ module.exports = React.createClass({
 			_return = item[this.props.textKey];
 		}
 		return <li key={index} className={znui.react.classname('zr-list-item', (this.__isChecked(item, index)?'checked':''))} onClick={(event)=>{
-					item.event = event;
-					this.__itemClick(item, index)
+					event.data = item;
+					event.index = index;
+					this.__itemClick(event, index)
 				}}>
 			{_return}
 		</li>;
@@ -99,7 +102,7 @@ module.exports = React.createClass({
 		return (
 			<ul style={this.props.style} className={znui.react.classname("zr-list zr-list-style-flex-row", this.props.className)}>
 				{this.props.children}
-				<znui.react.DataViewer data={this.props.data} itemRender={this.__itemRender} />
+				<znui.react.DataView data={this.props.data} itemRender={this.__itemRender} />
 			</ul>
 		);
 	}

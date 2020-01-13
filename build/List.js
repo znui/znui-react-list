@@ -61,15 +61,16 @@ module.exports = React.createClass({
 
     return false;
   },
-  __itemClick: function __itemClick(item) {
-    var _return = this.props.onItemClick && this.props.onItemClick(item, this);
+  __itemClick: function __itemClick(event, index) {
+    var _return = this.props.onItemClick && this.props.onItemClick(event, this);
 
     if (_return == null) {
-      this.__clickDefault(item);
+      this.__clickDefault(event);
     }
   },
-  __clickDefault: function __clickDefault(item) {
-    var _value = item[this.props.valueKey];
+  __clickDefault: function __clickDefault(event) {
+    var _data = event.data,
+        _value = _data[this.props.valueKey];
 
     if (this.props.selectMode == 'single') {
       this.state.value = _value;
@@ -81,8 +82,9 @@ module.exports = React.createClass({
       }
     }
 
+    event.value = this.state.value;
     this.forceUpdate();
-    this.props.onChanged && this.props.onChanged(this.state.value, item, this);
+    this.props.onChange && this.props.onChange(event, this);
   },
   __itemRender: function __itemRender(item, index) {
     var _this = this;
@@ -107,9 +109,10 @@ module.exports = React.createClass({
       key: index,
       className: znui.react.classname('zr-list-item', this.__isChecked(item, index) ? 'checked' : ''),
       onClick: function onClick(event) {
-        item.event = event;
+        event.data = item;
+        event.index = index;
 
-        _this.__itemClick(item, index);
+        _this.__itemClick(event, index);
       }
     }, _return);
   },
@@ -117,7 +120,7 @@ module.exports = React.createClass({
     return React.createElement("ul", {
       style: this.props.style,
       className: znui.react.classname("zr-list zr-list-style-flex-row", this.props.className)
-    }, this.props.children, React.createElement(znui.react.DataViewer, {
+    }, this.props.children, React.createElement(znui.react.DataView, {
       data: this.props.data,
       itemRender: this.__itemRender
     }));

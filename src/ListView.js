@@ -7,7 +7,7 @@ var ListView = React.createClass({
 		return (
 			<div {...this.props} className={znui.react.classname("zr-list-view", this.props.className)}>
 				{this.props.children}
-				<znui.react.DataViewer {...this.props} />
+				<znui.react.DataView {...this.props} />
 			</div>
 		);
 	}
