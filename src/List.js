@@ -2,7 +2,7 @@ var React = znui.React || require('react');
 var loader = require('znui-react-loader');
 
 module.exports = React.createClass({
-	displayName:'List',
+	displayName:'ZRList',
 	getDefaultProps: function (){
 		return {
 			selectMode: 'single', // single, multiple,

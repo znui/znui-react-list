@@ -9,9 +9,9 @@ var loader = require('znui-react-loader');
 var ListView = React.createClass({
   displayName: 'List',
   render: function render() {
-    return React.createElement("div", _extends({}, this.props, {
+    return /*#__PURE__*/React.createElement("div", _extends({}, this.props, {
       className: znui.react.classname("zr-list-view", this.props.className)
-    }), this.props.children, React.createElement(znui.react.DataView, this.props));
+    }), this.props.children, /*#__PURE__*/React.createElement(znui.react.DataView, this.props));
   }
 });
 ListView.Item = require('./ListViewItem');

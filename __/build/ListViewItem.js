@@ -14,7 +14,7 @@ module.exports = React.createClass({
     this.props.onClick && this.props.onClick(event, this);
   },
   render: function render() {
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: this.props.style,
       className: znui.react.classname('zr-list-view-item', this.props.className),
       "data-checked": this.props.checked,

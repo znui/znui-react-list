@@ -105,7 +105,7 @@ module.exports = React.createClass({
       _return = item[this.props.textKey];
     }
 
-    return React.createElement("li", {
+    return /*#__PURE__*/React.createElement("li", {
       key: index,
       className: znui.react.classname('zr-list-item', this.__isChecked(item, index) ? 'checked' : ''),
       onClick: function onClick(event) {
@@ -117,10 +117,10 @@ module.exports = React.createClass({
     }, _return);
   },
   render: function render() {
-    return React.createElement("ul", {
+    return /*#__PURE__*/React.createElement("ul", {
       style: this.props.style,
       className: znui.react.classname("zr-list zr-list-style-flex-row", this.props.className)
-    }, this.props.children, React.createElement(znui.react.DataView, {
+    }, this.props.children, /*#__PURE__*/React.createElement(znui.react.DataView, {
       data: this.props.data,
       itemRender: this.__itemRender
     }));
