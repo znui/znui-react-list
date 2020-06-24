@@ -3,7 +3,7 @@
 var React = znui.React || require('react');
 
 module.exports = React.createClass({
-  displayName: 'ListViewItem',
+  displayName: 'ZRListViewItem',
   getDefaultProps: function getDefaultProps() {
     return {
       checked: false,

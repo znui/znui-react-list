@@ -1,6 +1,6 @@
 {
   "name": "znui-react-list",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Web list component.",
   "main": "index.js",
   "scripts": {
