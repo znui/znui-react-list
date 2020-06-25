@@ -66,6 +66,28 @@
     &.zr-list-style-flex-column {
         display: flex;
         flex-direction: column;
+        border: 1px solid #f3f1f1;
+        border-radius: 3px;
+        cursor: pointer;
+        .zr-list-item{
+            border-bottom: 1px solid #f3f1f1;
+            line-height: 30px;
+            padding: 0px 5px;
+            &:last-child{
+                border-bottom-color: transparent;
+            }
+            &:hover{
+                background-color: #fbf4f4;
+            }
+            &:active{
+                background-color: #f1ecec;
+                color: #2c89e8;
+            }
+            &.checked{
+                background-color: #e4dddd;
+                color: #0756a7;
+                font-weight: bold;
+            }
+        }
     }
-
 }

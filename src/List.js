@@ -1,10 +1,9 @@
 var React = znui.React || require('react');
-var loader = require('znui-react-loader');
-
 module.exports = React.createClass({
 	displayName:'ZRList',
 	getDefaultProps: function (){
 		return {
+			className: "zr-list-style-flex-row",
 			selectMode: 'single', // single, multiple,
 			textKey: 'text',
 			valueKey: 'value',
@@ -42,14 +41,10 @@ module.exports = React.createClass({
 		if(zn.is(this.state.value, 'array')){
 			if(this.state.value.indexOf(_value) != -1){
 				return true;
-			}else{
-				return false;
 			}
 		}else{
 			if(_value === this.state.value){
 				return true;
-			}else{
-				return false;
 			}
 		}
 
@@ -87,8 +82,12 @@ module.exports = React.createClass({
 		}
 
 		var _return = this.props.itemRender && this.props.itemRender(item, index);
-		if(!_return) {
-			_return = item[this.props.textKey];
+		if(!_return && this.props.textKey) {
+			if(this.props.textKey.indexOf('{')!=-1 && this.props.textKey.indexOf('}')!=-1){
+				_return = this.props.textKey.format(item);
+			}else{
+				_return = item[this.props.textKey];
+			}
 		}
 		return <li key={index} className={znui.react.classname('zr-list-item', (this.__isChecked(item, index)?'checked':''))} onClick={(event)=>{
 					event.data = item;
@@ -100,9 +99,9 @@ module.exports = React.createClass({
 	},
 	render: function(){
 		return (
-			<ul style={this.props.style} className={znui.react.classname("zr-list zr-list-style-flex-row", this.props.className)}>
+			<ul style={this.props.style} className={znui.react.classname("zr-list", this.props.className)}>
 				{this.props.children}
-				<znui.react.DataView data={this.props.data} itemRender={this.__itemRender} />
+				<znui.react.DataView data={this.props.data} itemRender={this.__itemRender} responseHandler={this.props.responseHandler} />
 			</ul>
 		);
 	}

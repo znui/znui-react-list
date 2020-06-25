@@ -2,12 +2,11 @@
 
 var React = znui.React || require('react');
 
-var loader = require('znui-react-loader');
-
 module.exports = React.createClass({
   displayName: 'ZRList',
   getDefaultProps: function getDefaultProps() {
     return {
+      className: "zr-list-style-flex-row",
       selectMode: 'single',
       // single, multiple,
       textKey: 'text',
@@ -48,14 +47,10 @@ module.exports = React.createClass({
     if (zn.is(this.state.value, 'array')) {
       if (this.state.value.indexOf(_value) != -1) {
         return true;
-      } else {
-        return false;
       }
     } else {
       if (_value === this.state.value) {
         return true;
-      } else {
-        return false;
       }
     }
 
@@ -101,8 +96,12 @@ module.exports = React.createClass({
 
     var _return = this.props.itemRender && this.props.itemRender(item, index);
 
-    if (!_return) {
-      _return = item[this.props.textKey];
+    if (!_return && this.props.textKey) {
+      if (this.props.textKey.indexOf('{') != -1 && this.props.textKey.indexOf('}') != -1) {
+        _return = this.props.textKey.format(item);
+      } else {
+        _return = item[this.props.textKey];
+      }
     }
 
     return /*#__PURE__*/React.createElement("li", {
@@ -119,10 +118,11 @@ module.exports = React.createClass({
   render: function render() {
     return /*#__PURE__*/React.createElement("ul", {
       style: this.props.style,
-      className: znui.react.classname("zr-list zr-list-style-flex-row", this.props.className)
+      className: znui.react.classname("zr-list", this.props.className)
     }, this.props.children, /*#__PURE__*/React.createElement(znui.react.DataView, {
       data: this.props.data,
-      itemRender: this.__itemRender
+      itemRender: this.__itemRender,
+      responseHandler: this.props.responseHandler
     }));
   }
 });
