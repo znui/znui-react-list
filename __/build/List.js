@@ -1,5 +1,7 @@
 "use strict";
 
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 var React = znui.React || require('react');
 
 module.exports = React.createClass({
@@ -115,14 +117,15 @@ module.exports = React.createClass({
       }
     }, _return);
   },
-  render: function render() {
+  __dataRender: function __dataRender(data) {
     return /*#__PURE__*/React.createElement("ul", {
       style: this.props.style,
       className: znui.react.classname("zr-list", this.props.className)
-    }, this.props.children, /*#__PURE__*/React.createElement(znui.react.DataView, {
-      data: this.props.data,
-      itemRender: this.__itemRender,
-      responseHandler: this.props.responseHandler
+    }, this.props.children, data.map(this.__itemRender));
+  },
+  render: function render() {
+    return /*#__PURE__*/React.createElement(znui.react.DataView, _extends({}, this.props, {
+      dataRender: this.__dataRender
     }));
   }
 });

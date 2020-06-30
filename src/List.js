@@ -97,12 +97,19 @@ module.exports = React.createClass({
 			{_return}
 		</li>;
 	},
-	render: function(){
+	__dataRender: function (data){
 		return (
 			<ul style={this.props.style} className={znui.react.classname("zr-list", this.props.className)}>
 				{this.props.children}
-				<znui.react.DataView data={this.props.data} itemRender={this.__itemRender} responseHandler={this.props.responseHandler} />
+				{
+					data.map(this.__itemRender)
+				}
 			</ul>
+		);
+	},
+	render: function(){
+		return (
+			<znui.react.DataView {...this.props} dataRender={this.__dataRender} />
 		);
 	}
 });
