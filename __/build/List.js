@@ -96,9 +96,9 @@ module.exports = React.createClass({
       item.index = index;
     }
 
-    var _return = this.props.itemRender && this.props.itemRender(item, index);
+    var _return = this.props.itemRender && this.props.itemRender(item, index, this);
 
-    if (!_return && this.props.textKey) {
+    if (_return == null && this.props.textKey) {
       if (this.props.textKey.indexOf('{') != -1 && this.props.textKey.indexOf('}') != -1) {
         _return = this.props.textKey.format(item);
       } else {
