@@ -1,7 +1,8 @@
 "use strict";
 
 module.exports = {
-  'List': require('./List'),
-  'ListView': require('./ListView'),
-  'ListViewItem': require('./ListViewItem')
+  List: require('./List'),
+  ListPager: require('./ListPager'),
+  ListView: require('./ListView'),
+  ListViewItem: require('./ListViewItem')
 };

@@ -7,7 +7,8 @@ module.exports = require(_path + 'znui-react/webpack').component.example('produc
     return {
         resolve: {
             alias: {
-                "znui-react": node_path.resolve(__dirname, '../../znui-react')
+                "znui-react": node_path.resolve(__dirname, '../../znui-react'),
+                "znui-react-pager": node_path.resolve(__dirname, '../../znui-react-pager')
             }
         }
     };
