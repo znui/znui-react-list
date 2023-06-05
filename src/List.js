@@ -89,13 +89,15 @@ module.exports = React.createClass({
 				_return = item[this.props.textKey];
 			}
 		}
-		return <li key={index} className={znui.react.classname('zr-list-item', (this.__isChecked(item, index)?'checked':''))} onClick={(event)=>{
-					event.data = item;
-					event.index = index;
-					this.__itemClick(event, index)
-				}}>
-			{_return}
-		</li>;
+		return (
+			<li key={index} className={znui.react.classname('zr-list-item', (this.__isChecked(item, index)?'checked':''))} onClick={(event)=>{
+						event.data = item;
+						event.index = index;
+						this.__itemClick(event, index)
+					}}>
+				{_return}
+			</li>
+		);
 	},
 	__dataRender: function (data){
 		return (
